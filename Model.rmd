@@ -232,7 +232,8 @@ while(i< 10){
 ## Загрузка данных
 
 ```{r}
-df <-read.csv("C:/Users/User/Downloads/Spark_vyborka_kompaniy_20230318_1520_1.csv")
+#df <-read.csv("C:/Users/User/Downloads/Spark_vyborka_kompaniy_20230318_1520_1.csv")
+df <-read.csv("Data/match_df.csv")
 df<-drop_na(df)#Выкидываем пропуски
 attach(df) # закрепляет датасет и можно обращаться к столбцам как к переменным
 data
