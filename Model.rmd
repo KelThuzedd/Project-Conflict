@@ -4,6 +4,8 @@ output:
   html_document:
     theme: flatly
 runtime: shiny
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -233,8 +235,7 @@ while(i< 10){
 
 ```{r}
 #df <-read.csv("C:/Users/User/Downloads/Spark_vyborka_kompaniy_20230318_1520_1.csv")
-df <-read.csv("Data/match_df.csv")
-df<-drop_na(df)#Выкидываем пропуски
+df <-read.csv("Data/matched_df.csv")
 attach(df) # закрепляет датасет и можно обращаться к столбцам как к переменным
 data
 ```
@@ -242,7 +243,16 @@ data
 ## Подготовим дата сет для модели
 
 ```{r}
-for_model <- df[,-c(2,3,4,6)]#Этот дата сет мы используем везде дальше , а тут выбрали столбцы которые удаляем
+for_model <- df[,-c(10,11,12,13,14)]#Этот дата сет мы используем везде дальше , а тут выбрали столбцы которые удаляем
+a<- for_model$Conflict
+b<- for_model$Time
+c<- for_model$Returns
+all<- a*b*c
+
+for_model$y_t_conflict <- all
+```
+
+```{r}
 for_model
 ```
 
@@ -255,7 +265,7 @@ summary_data(for_model)
 ## Ящики
 
 ```{r}
-graph_box(for_model[,-c(1,4,3)])#Tут можно смотреть на выбросы
+graph_box(for_model[,-c(2,4,3)])#Tут можно смотреть на выбросы
 ```
 
 ## Проверка на стационарность
