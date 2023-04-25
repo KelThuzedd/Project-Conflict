@@ -65,7 +65,6 @@ library(rlang)
 library(tidyverse)
 library("forecast")
 library("lmtest")
-library("tseries")
 library("vars")
 library("urca")
 library("TSA")
@@ -243,13 +242,16 @@ data
 ## Подготовим дата сет для модели
 
 ```{r}
-for_model <- df[,-c(10,11,12,13,14)]#Этот дата сет мы используем везде дальше , а тут выбрали столбцы которые удаляем
+df
+for_model <- df[,-c(23,24,25,26,27)]#Этот дата сет мы используем везде дальше , а тут выбрали столбцы которые удаляем
 a<- for_model$Conflict
 b<- for_model$Time
 c<- for_model$Returns
 all<- a*b*c
 
 for_model$y_t_conflict <- all
+
+#for_model<-for_model[,-c(5,6,8,9)]
 ```
 
 ```{r}
